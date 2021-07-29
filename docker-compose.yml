@@ -1,0 +1,25 @@
+version: "3.8"
+
+services: 
+    mysql: 
+        container_name: mysql
+        image: mysql:latest
+        ports: 
+            - 3307:3306
+        environment: 
+            - MYSQL_ROOT_PASSWORD=root
+        networks: 
+            - hello-word-go
+    gohelloword: 
+        container_name: gohelloword
+        image: gohelloword:latest
+        ports: 
+            - 8080:8080
+        depends_on: 
+            - mysql
+        networks:
+            - hello-word-go
+
+networks: 
+    hello-word-go:
+        name: hello-word-go
